@@ -1,0 +1,117 @@
+body {
+  font-family: "Arial", sans-serif;
+  background-color: #f9f9f9;
+  color: #333;
+  margin: 0;
+  padding: 0;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  height: 100vh;
+}
+
+h1 {
+  font-size: 2.5rem;
+  color: #4a4a4a;
+}
+
+input[type="tel"] {
+  width: 80%;
+  padding: 10px;
+  margin: 10px 0;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+  font-size: 1rem;
+}
+
+button {
+  background-color: #25d366; /* WhatsApp green */
+  color: white;
+  border: none;
+  border-radius: 5px;
+  padding: 10px 20px;
+  font-size: 1rem;
+  cursor: pointer;
+  transition: background-color 0.3s;
+}
+
+button:hover {
+  background-color: #128c7e; /* Darker green on hover */
+}
+
+.qr-code {
+  margin-top: 20px;
+  display: flex;
+  justify-content: center;
+}
+
+.error {
+  color: red;
+  font-size: 0.9rem;
+}
+
+/* Input states */
+.phone-input.valid {
+  border-color: #10b981;
+  background-color: #ecfdf5;
+}
+
+.phone-input.invalid {
+  border-color: #ef4444;
+  background-color: #fef2f2;
+}
+
+/* Validation message styles */
+#validation-message {
+  font-size: 0.875rem;
+  transition: all 0.3s ease;
+}
+
+#validation-message.success {
+  color: #10b981;
+}
+
+#validation-message.error {
+  color: #ef4444;
+}
+
+/* Animation for validation message */
+.message-animation {
+  animation: fadeInUp 0.3s ease-out;
+}
+
+@keyframes fadeInUp {
+  from {
+    opacity: 0;
+    transform: translateY(5px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* Container hover effect */
+.container {
+  transition: transform 0.2s ease;
+}
+
+.container:hover {
+  transform: translateY(-2px);
+}
+
+/* Input with country code styling */
+.phone-input {
+  padding-left: 4rem !important;
+}
+
+/* Generated link input styling */
+#generated-link {
+  font-family: monospace;
+}
+
+/* Copy button transition */
+#copy-link {
+  transition: all 0.3s ease;
+}

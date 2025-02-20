@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>WhatsApp Link Generator</title>
+    <link
+      href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css"
+      rel="stylesheet"
+    />
+    <link rel="stylesheet" href="css/style.css" />
+    <link rel="icon" href="../assets/favicon.svg" type="image/svg+xml" />
+  </head>
+  <body class="bg-gray-100 flex items-center justify-center min-h-screen">
+    <div class="container mx-auto p-6 bg-white shadow-md rounded-lg max-w-md">
+      <h1 class="text-2xl font-bold text-center mb-4">
+        WhatsApp Link Generator
+      </h1>
+      <p class="text-center mb-6">Generate your WhatsApp chat link easily!</p>
+      <div class="flex flex-col items-center space-y-4">
+        <div class="w-full">
+          <label for="phone-number" class="block text-gray-700 mb-2"
+            >Phone Number:</label
+          >
+          <div class="relative flex items-center">
+            <div
+              class="absolute left-3 px-2 py-1 bg-gray-100 rounded text-gray-600 select-none"
+            >
+              +91
+            </div>
+            <input
+              type="tel"
+              id="phone-number"
+              class="phone-input block w-full pl-16 pr-3 py-2 border rounded-md shadow-sm focus:outline-none focus:ring-2 focus:ring-green-500 focus:border-green-500"
+              placeholder="Enter 10-digit number"
+              maxlength="10"
+              required
+            />
+          </div>
+          <div id="validation-message" class="mt-2 text-sm hidden"></div>
+        </div>
+
+        <!-- Generated Link Display -->
+        <div id="generated-link-container" class="w-full hidden">
+          <label class="block text-gray-700 mb-2">Generated Link:</label>
+          <div class="flex items-center space-x-2">
+            <input
+              type="text"
+              id="generated-link"
+              class="block w-full px-3 py-2 bg-gray-50 border rounded-md shadow-sm text-sm text-gray-600"
+              readonly
+            />
+            <button
+              id="copy-link"
+              class="px-3 py-2 bg-blue-500 text-white rounded-md hover:bg-blue-600 transition-colors"
+            >
+              Copy
+            </button>
+          </div>
+        </div>
+
+        <button
+          id="open-whatsapp"
+          class="w-full bg-green-500 text-white px-6 py-2 rounded-md hover:bg-green-600 transition-colors disabled:opacity-50 disabled:cursor-not-allowed"
+          disabled
+        >
+          Open WhatsApp
+        </button>
+      </div>
+    </div>
+    <script src="js/app.js"></script>
+  </body>
+</html>
