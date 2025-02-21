@@ -10,10 +10,22 @@ console.log("WhatsApp Button:", document.getElementById("open-whatsapp"));
 
 document.addEventListener("DOMContentLoaded", function () {
   // Constants for validation
-  const PHONE_REGEX = /^[6-9]\d{9}$/;
-  const MIN_LENGTH = 10;
+  const PHONE_REGEX = {
+    91: /^[6-9]\d{9}$/, // India
+    1: /^\d{10}$/, // US/Canada
+    44: /^\d{10}$/, // UK
+    61: /^\d{9}$/, // Australia
+    86: /^\d{11}$/, // China
+    81: /^\d{10}$/, // Japan
+    49: /^\d{11}$/, // Germany
+    33: /^\d{9}$/, // France
+    7: /^\d{10}$/, // Russia
+    65: /^\d{8}$/, // Singapore
+    971: /^\d{9}$/, // UAE
+  };
 
-  // DOM Elements - Add null checks
+  // DOM Elements
+  const countryCode = document.getElementById("country-code");
   const phoneInput = document.getElementById("phone-number");
   const validationMessage = document.getElementById("validation-message");
   const whatsappButton = document.getElementById("open-whatsapp");
@@ -32,23 +44,18 @@ document.addEventListener("DOMContentLoaded", function () {
   // Validation messages
   const messages = {
     empty: "Please enter a phone number",
-    invalid: "Please enter a valid 10-digit mobile number",
-    invalidStart: "Indian mobile numbers must start with 6, 7, 8, or 9",
-    tooShort: "Please enter complete 10 digits",
-    tooLong: "Phone number cannot exceed 10 digits",
+    invalid: "Please enter a valid phone number for the selected country",
     valid: "Valid phone number!",
   };
 
   // Input validation handler
   phoneInput.addEventListener("input", function (e) {
     const number = e.target.value.trim();
+    const selectedCountry = countryCode.value;
 
     // Reset classes
     this.classList.remove("valid", "invalid");
-    validationMessage.classList.remove("success", "error");
-    validationMessage.classList.remove("hidden");
-
-    // Enable/disable button
+    validationMessage.classList.remove("success", "error", "hidden");
     whatsappButton.disabled = true;
 
     // Validate input
@@ -60,29 +67,11 @@ document.addEventListener("DOMContentLoaded", function () {
     // Check for non-numeric characters
     if (!/^\d*$/.test(number)) {
       e.target.value = number.replace(/\D/g, "");
-      showError("Only numbers are allowed");
       return;
     }
 
-    // Length validation
-    if (number.length < MIN_LENGTH) {
-      showError(messages.tooShort);
-      return;
-    }
-
-    if (number.length > MIN_LENGTH) {
-      showError(messages.tooLong);
-      return;
-    }
-
-    // First digit validation
-    if (!/^[6-9]/.test(number)) {
-      showError(messages.invalidStart);
-      return;
-    }
-
-    // Full number validation
-    if (PHONE_REGEX.test(number)) {
+    // Validate against country-specific regex
+    if (PHONE_REGEX[selectedCountry].test(number)) {
       showSuccess();
       whatsappButton.disabled = false;
     } else {
@@ -90,27 +79,18 @@ document.addEventListener("DOMContentLoaded", function () {
     }
   });
 
-  // Show error message
-  function showError(message) {
-    validationMessage.textContent = message;
-    validationMessage.classList.remove("hidden", "success");
-    validationMessage.classList.add("error", "message-animation");
-    phoneInput.classList.add("invalid");
-  }
-
-  // Show success message
-  function showSuccess() {
-    validationMessage.textContent = messages.valid;
-    validationMessage.classList.remove("hidden", "error");
-    validationMessage.classList.add("success", "message-animation");
-    phoneInput.classList.add("valid");
-  }
+  // Country code change handler
+  countryCode.addEventListener("change", function () {
+    // Revalidate number when country changes
+    phoneInput.dispatchEvent(new Event("input"));
+  });
 
   // WhatsApp button click handler
   whatsappButton.addEventListener("click", function () {
     const number = phoneInput.value.trim();
-    if (PHONE_REGEX.test(number)) {
-      const whatsappLink = `https://wa.me/91${number}`;
+    const selectedCountry = countryCode.value;
+    if (PHONE_REGEX[selectedCountry].test(number)) {
+      const whatsappLink = `https://wa.me/${selectedCountry}${number}`;
       console.log("Opening WhatsApp with link:", whatsappLink); // Debug log
       window.open(whatsappLink, "_blank");
     }
@@ -128,5 +108,20 @@ document.addEventListener("DOMContentLoaded", function () {
         this.textContent = "Copy";
       }, 2000);
     });
+  }
+
+  // Helper functions
+  function showError(message) {
+    validationMessage.textContent = message;
+    validationMessage.classList.remove("hidden", "success");
+    validationMessage.classList.add("error");
+    phoneInput.classList.add("invalid");
+  }
+
+  function showSuccess() {
+    validationMessage.textContent = messages.valid;
+    validationMessage.classList.remove("hidden", "error");
+    validationMessage.classList.add("success");
+    phoneInput.classList.add("valid");
   }
 });

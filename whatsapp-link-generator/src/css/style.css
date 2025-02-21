@@ -9,6 +9,8 @@ body {
   align-items: center;
   justify-content: center;
   height: 100vh;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
 }
 
 h1 {
@@ -26,73 +28,36 @@ input[type="tel"] {
 }
 
 button {
-  background-color: #25d366; /* WhatsApp green */
-  color: white;
-  border: none;
-  border-radius: 5px;
-  padding: 10px 20px;
-  font-size: 1rem;
-  cursor: pointer;
-  transition: background-color 0.3s;
+  color: #25d366; /* WhatsApp green */
+  font-size: 1.9rem;
 }
 
-button:hover {
-  background-color: #128c7e; /* Darker green on hover */
-}
-
-.qr-code {
-  margin-top: 20px;
-  display: flex;
-  justify-content: center;
-}
-
-.error {
-  color: red;
-  font-size: 0.9rem;
+/* Select styling */
+#country-code {
+  height: 42px; /* Match input height */
 }
 
 /* Input states */
 .phone-input.valid {
-  border-color: #10b981;
+  border-color: #059669;
   background-color: #ecfdf5;
 }
 
 .phone-input.invalid {
-  border-color: #ef4444;
+  border-color: #dc2626;
   background-color: #fef2f2;
 }
 
-/* Validation message styles */
-#validation-message {
-  font-size: 0.875rem;
-  transition: all 0.3s ease;
-}
-
+/* Validation message */
 #validation-message.success {
-  color: #10b981;
+  color: #059669;
 }
 
 #validation-message.error {
-  color: #ef4444;
+  color: #dc2626;
 }
 
-/* Animation for validation message */
-.message-animation {
-  animation: fadeInUp 0.3s ease-out;
-}
-
-@keyframes fadeInUp {
-  from {
-    opacity: 0;
-    transform: translateY(5px);
-  }
-  to {
-    opacity: 1;
-    transform: translateY(0);
-  }
-}
-
-/* Container hover effect */
+/* Container animations */
 .container {
   transition: transform 0.2s ease;
 }
@@ -103,7 +68,7 @@ button:hover {
 
 /* Input with country code styling */
 .phone-input {
-  padding-left: 4rem !important;
+  padding-left: 6rem !important;
 }
 
 /* Generated link input styling */
@@ -114,4 +79,53 @@ button:hover {
 /* Copy button transition */
 #copy-link {
   transition: all 0.3s ease;
+}
+
+#country-code {
+  z-index: 10;
+  min-width: 85px;
+  height: 42px; /* Match input height */
+}
+
+/* Focus styles */
+select:focus,
+input:focus {
+  outline: none;
+  box-shadow: 0 0 0 2px rgba(16, 185, 129, 0.2);
+}
+
+/* Input and select styles */
+.phone-input,
+select {
+  height: 42px;
+}
+
+/* Placeholder styles */
+::placeholder {
+  color: #9ca3af;
+  opacity: 1;
+}
+
+/* Mobile-first responsive adjustments */
+@media (max-width: 640px) {
+  .container {
+    padding: 1rem;
+  }
+
+  input,
+  select,
+  button {
+    font-size: 16px; /* Prevents iOS zoom on focus */
+  }
+}
+
+/* Dark mode support */
+@media (prefers-color-scheme: dark) {
+  .phone-input.valid {
+    background-color: rgba(16, 185, 129, 0.1);
+  }
+
+  .phone-input.invalid {
+    background-color: rgba(239, 68, 68, 0.1);
+  }
 }

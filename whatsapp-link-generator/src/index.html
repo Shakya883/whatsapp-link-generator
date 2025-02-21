@@ -12,56 +12,59 @@
     <link rel="icon" href="../assets/favicon.svg" type="image/svg+xml" />
   </head>
   <body class="bg-gray-100 flex items-center justify-center min-h-screen">
-    <div class="container mx-auto p-6 bg-white shadow-md rounded-lg max-w-md">
-      <h1 class="text-2xl font-bold text-center mb-4">
+    <div
+      class="container mx-auto p-4 sm:p-6 bg-white shadow-md rounded-lg max-w-md"
+    >
+      <h1
+        class="text-xl sm:text-2xl font-bold text-center mb-3 sm:mb-4 text-gray-800"
+      >
         WhatsApp Link Generator
       </h1>
-      <p class="text-center mb-6">Generate your WhatsApp chat link easily!</p>
+      <p class="text-center mb-6 text-sm sm:text-base text-gray-600">
+        Generate your WhatsApp chat link easily!
+      </p>
       <div class="flex flex-col items-center space-y-4">
         <div class="w-full">
-          <label for="phone-number" class="block text-gray-700 mb-2"
-            >Phone Number:</label
+          <label
+            for="phone-number"
+            class="block text-sm font-medium text-gray-700 mb-2"
           >
-          <div class="relative flex items-center">
-            <div
-              class="absolute left-3 px-2 py-1 bg-gray-100 rounded text-gray-600 select-none"
+            Phone Number
+          </label>
+          <div class="flex items-center gap-2">
+            <select
+              id="country-code"
+              class="w-24 sm:w-28 px-2 sm:px-3 py-2 bg-gray-50 border border-gray-300 rounded-md text-sm text-gray-600 focus:outline-none focus:ring-2 focus:ring-green-500 focus:border-green-500"
             >
-              +91
-            </div>
+              <option value="91" selected>+91 (IN)</option>
+              <option value="1">+1 (US/CA)</option>
+              <option value="44">+44 (UK)</option>
+              <option value="61">+61 (AU)</option>
+              <option value="86">+86 (CN)</option>
+              <option value="81">+81 (JP)</option>
+              <option value="49">+49 (DE)</option>
+              <option value="33">+33 (FR)</option>
+              <option value="7">+7 (RU)</option>
+              <option value="65">+65 (SG)</option>
+              <option value="971">+971 (UAE)</option>
+            </select>
             <input
               type="tel"
               id="phone-number"
-              class="phone-input block w-full pl-16 pr-3 py-2 border rounded-md shadow-sm focus:outline-none focus:ring-2 focus:ring-green-500 focus:border-green-500"
-              placeholder="Enter 10-digit number"
-              maxlength="10"
+              class="phone-input flex-1 px-3 py-2 border border-gray-300 rounded-md shadow-sm text-sm sm:text-base placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-green-500 focus:border-green-500"
+              placeholder="Enter mobile number"
               required
             />
           </div>
-          <div id="validation-message" class="mt-2 text-sm hidden"></div>
-        </div>
-
-        <!-- Generated Link Display -->
-        <div id="generated-link-container" class="w-full hidden">
-          <label class="block text-gray-700 mb-2">Generated Link:</label>
-          <div class="flex items-center space-x-2">
-            <input
-              type="text"
-              id="generated-link"
-              class="block w-full px-3 py-2 bg-gray-50 border rounded-md shadow-sm text-sm text-gray-600"
-              readonly
-            />
-            <button
-              id="copy-link"
-              class="px-3 py-2 bg-blue-500 text-white rounded-md hover:bg-blue-600 transition-colors"
-            >
-              Copy
-            </button>
-          </div>
+          <div
+            id="validation-message"
+            class="mt-2 text-xs sm:text-sm hidden"
+          ></div>
         </div>
 
         <button
           id="open-whatsapp"
-          class="w-full bg-green-500 text-white px-6 py-2 rounded-md hover:bg-green-600 transition-colors disabled:opacity-50 disabled:cursor-not-allowed"
+          class="inline-flex items-center justify-center px-4 sm:px-5 py-2 border border-transparent text-sm sm:text-base font-medium rounded-md text-white bg-green-600 hover:bg-green-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-green-500 transition-colors disabled:opacity-50 disabled:cursor-not-allowed shadow-sm"
           disabled
         >
           Open WhatsApp
